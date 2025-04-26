@@ -1,0 +1,11 @@
+package top.cyclops.spear.module2.data.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Singer(
+    @PrimaryKey
+    val id: Long,
+    val name: String
+)
