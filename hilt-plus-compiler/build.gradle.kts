@@ -6,6 +6,8 @@ plugins {
     kotlin("kapt")
     alias(libs.plugins.vanniktech.maven.publish)
 }
+val hiltPlusVersion = project.properties["version"] as String
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -36,7 +38,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     signAllPublications()
-    coordinates("top.cyclops", "hilt-plus-compiler", "0.1.1")
+    coordinates("top.cyclops", "hilt-plus-compiler", hiltPlusVersion)
     pom {
         name = "hilt-plus-compiler"
         description = "generate room and api provider for hilt"
