@@ -142,7 +142,7 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
                         "%T.databaseBuilder(context,%T::class.java,%S)\n",
                         roomClass,
                         genDatabaseName,
-                        "$name.db"
+                        "${data.name}.db"
                     )
                 }
                 if (data.printSql) {
