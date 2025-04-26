@@ -2,9 +2,11 @@ package hilt.plus.compiler.room
 
 import androidx.room.Database
 import com.google.devtools.ksp.isInternal
+import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.asClassName
@@ -127,6 +129,7 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
             +"context".parameter(ClassName("android.content", "Context")) {
                 +annotation(ClassName("dagger.hilt.android.qualifiers", "ApplicationContext"))
             }
+            +suppressAnnotation("UNCHECKED_CAST")
             +annotation(Provides::class)
             +annotation(Singleton::class)
             +codeBlock {
@@ -145,6 +148,9 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
                         "${data.name}.db"
                     )
                 }
+                if (interceptor != null) {
+                    +interceptorFunc()
+                }
                 if (data.printSql) {
                     +codes(
                         """|.setQueryCallback({ sqlQuery, bindArgs ->
@@ -158,6 +164,34 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
 
             }
             returns(genDatabaseName)
+        }
+    }
+
+    private fun RoomDatabaseElement.interceptorFunc(): CodeBlock {
+        val interceptorType = interceptor!!
+        return codeBlock {
+            +codes(".let{ builder -> \n\t")
+            if (interceptorType.classKind == ClassKind.OBJECT) {
+                +codes(
+                    "%T.interceptor(builder) ",
+                    interceptorType.toClassName(),
+                )
+            } else if (interceptorType.primaryConstructor?.parameters.isNullOrEmpty()) {
+                +codes(
+                    "%T().interceptor(builder) ",
+                    interceptorType.toClassName(),
+                )
+            } else {
+                +codes(
+                    "%T(context).interceptor(builder) ",
+                    interceptorType.toClassName(),
+                )
+            }
+            +codes(
+                "as %T.Builder<%T>\n", ClassName("androidx.room.", "RoomDatabase"),
+                genDatabaseName
+            )
+            +codes("}\n")
         }
     }
 

@@ -1,6 +1,7 @@
 package hilt.plus.compiler.room
 
 import com.google.devtools.ksp.getAllSuperTypes
+import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import com.squareup.kotlinpoet.ClassName
@@ -27,6 +28,14 @@ data class RoomDatabaseElement(
     val isImplementedDatabaseTransaction = type.getAllSuperTypes().any {
         it.toClassName() == databaseTransactionClass
     }
+    val interceptor: KSClassDeclaration? by lazy {
+        if ((data.interceptor.declaration as KSClassDeclaration).classKind == ClassKind.INTERFACE) {
+            null
+        } else {
+            data.interceptor.declaration as KSClassDeclaration
+        }
+    }
+
     companion object {
         operator fun invoke(
             data: AnnotationElement<HiltRoomData>,

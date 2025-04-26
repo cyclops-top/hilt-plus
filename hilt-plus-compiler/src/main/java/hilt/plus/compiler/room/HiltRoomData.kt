@@ -13,5 +13,6 @@ data class HiltRoomData(
     val exportSchema: Boolean,
     val autoMigrations: List<KSAnnotation>,
     val inMemory: Boolean,
-    val printSql: Boolean,
+    val interceptor: KSType,
+    val printSql: Boolean
 )

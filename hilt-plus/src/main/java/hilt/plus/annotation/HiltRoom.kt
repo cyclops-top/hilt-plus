@@ -4,6 +4,7 @@ package hilt.plus.annotation
 
 import androidx.room.AutoMigration
 import dagger.hilt.GeneratesRootInput
+import hilt.plus.HiltPlusInterceptor
 import kotlin.reflect.KClass
 
 /**
@@ -19,6 +20,7 @@ annotation class HiltRoom(
     val exportSchema: Boolean = false,
     val autoMigrations: Array<AutoMigration> = [],
     val inMemory: Boolean = false,
-    val printSql: Boolean = false,
+    val interceptor: KClass<out HiltPlusInterceptor<*>> = HiltPlusInterceptor::class,
+    val printSql: Boolean = false
 )
 

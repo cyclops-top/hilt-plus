@@ -56,4 +56,10 @@ interface HiltPlusCodeGen<T, R> {
             }
         }
     }
+
+    fun suppressAnnotation(vararg names:String):AnnotationSpec{
+        return annotation(Suppress::class){
+            "names" set names.toList()
+        }
+    }
 }
