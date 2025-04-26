@@ -46,5 +46,10 @@ mavenPublishing {
                 url = "https://www.cyclops.top"
             }
         }
+        scm {
+            url = "https://github.com/cyclops-top/hilt-plus/tree/master/hilt-plus"
+            connection = "scm:git:git@github.com:cyclops-top/hilt-plus.git"
+            developerConnection = "scm:git:ssh://git@github.com:cyclops-top/hilt-plus.git"
+        }
     }
 }
