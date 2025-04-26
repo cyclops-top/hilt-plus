@@ -14,6 +14,7 @@ import com.squareup.kotlinpoet.ksp.writeTo
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseProcessor(
     private val environment: SymbolProcessorEnvironment,
 ) : SymbolProcessor {
@@ -28,10 +29,12 @@ abstract class BaseProcessor(
         return this
     }
 
-    fun FileSpec.save(dependencies: List<KSFile>) {
+   protected fun FileSpec.save(dependencies: List<KSFile>?) {
         writeTo(
             environment.codeGenerator,
-            Dependencies(false, *dependencies.toTypedArray())
+            dependencies?.let {
+                Dependencies(false, *it.toTypedArray())
+            } ?: Dependencies.ALL_FILES
         )
     }
 

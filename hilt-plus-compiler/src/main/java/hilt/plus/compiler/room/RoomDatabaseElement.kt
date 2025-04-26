@@ -27,12 +27,6 @@ data class RoomDatabaseElement(
     val isImplementedDatabaseTransaction = type.getAllSuperTypes().any {
         it.toClassName() == databaseTransactionClass
     }
-    val dependencies = listOfNotNull(type.containingFile) + entities.mapNotNull {
-        it.declaration.containingFile
-    } + views.mapNotNull { it.declaration.containingFile } + daoList.mapNotNull {
-        it.containingFile
-    } + providers.mapNotNull { it.containingFile }
-
     companion object {
         operator fun invoke(
             data: AnnotationElement<HiltRoomData>,

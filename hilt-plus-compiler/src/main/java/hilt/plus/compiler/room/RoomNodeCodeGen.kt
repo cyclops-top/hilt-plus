@@ -20,7 +20,7 @@ class RoomNodeCodeGen : HiltPlusCodeGen<RoomNodeElement, GeneratedFile> {
                 +source.genNodeAnnotation()
             }
         }
-        return GeneratedFile(file, source.dependencies)
+        return GeneratedFile(file)
     }
 
     private fun RoomNodeElement.genNodeAnnotation(): AnnotationSpec {

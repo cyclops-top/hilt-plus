@@ -73,7 +73,7 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
                 }
             }
         }.let {
-            GeneratedFile(it, dependencies)
+            GeneratedFile(it)
         }
     }
 
@@ -114,7 +114,7 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
                 +daoProviderFunc(it)
             }
         }.let {
-            GeneratedFile(it, dependencies)
+            GeneratedFile(it)
         }
     }
 

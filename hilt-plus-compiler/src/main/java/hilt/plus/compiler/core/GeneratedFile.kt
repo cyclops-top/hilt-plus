@@ -5,5 +5,5 @@ import com.squareup.kotlinpoet.FileSpec
 
 data class GeneratedFile(
     val file: FileSpec,
-    val dependencies: List<KSFile>
+    val dependencies: List<KSFile>? = null
 )
