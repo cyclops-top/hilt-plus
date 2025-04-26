@@ -28,7 +28,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     signAllPublications()
-    coordinates("top.cyclops", "knit", "0.1.0")
+    coordinates("top.cyclops", "knit", "0.1.1")
     pom {
         name = "knit"
         description = "kotlinpoet dsl"
