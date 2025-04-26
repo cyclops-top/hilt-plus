@@ -96,6 +96,9 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
         val name = toClassName()
         return name.unionFuncName() func {
             +abstract
+            if(isInternal()){
+                +internal
+            }
             returns(name)
         }
     }
@@ -104,6 +107,9 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
     private fun RoomDatabaseElement.genDatabaseModule(): GeneratedFile {
         return createModuleFile(genModuleName) {
             +originatingElementAnnotation(genDatabaseName)
+            if(type.isInternal()){
+                +internal
+            }
             +genCreateDatabaseFunc()
             +databaseProviderFunc()
             if (hasRoot) {
@@ -232,7 +238,9 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
         return name func {
             +annotation(Provides::class)
             +annotation(Singleton::class)
-
+            if(dao.isInternal()){
+                +internal
+            }
             returns(className)
 
             +"db".parameter(genDatabaseName)

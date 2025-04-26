@@ -10,7 +10,7 @@ import top.cyclops.spear.module1.data.model.User
  */
 @HiltDao(entities = [User::class])
 @Dao
-interface TestDao {
+internal interface TestDao {
     @Query("select * from user where id = :id")
     suspend fun findById(id: Long): User
 }

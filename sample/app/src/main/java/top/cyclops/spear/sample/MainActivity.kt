@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+internal class MainViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val musicRepository: MusicRepository,
     private val testDao: TestDao,
