@@ -1,7 +1,7 @@
 # Hilt Plus
 [![](https://img.shields.io/badge/ksp-2.1.10--1.0.31-important?logo=kotlin)](https://github.com/google/ksp)
 [![](https://img.shields.io/badge/hilt-2.56.2-important?logo=android)](https://developer.android.com/training/dependency-injection/hilt-android?hl=zh-cn)
-[![](https://img.shields.io/badge/hilt--plus-0.1.3-blueviolet?logo=android)](https://github.com/cyclops-top/hilt-plus)
+[![](https://img.shields.io/badge/hilt--plus-0.1.2-blueviolet?logo=android)](https://github.com/cyclops-top/hilt-plus)
 > A lightweight extension library based on Hilt, providing **Room multi-module aggregation** and **automated injection for dynamic proxy interfaces**, solving 80% of boilerplate code with 20% of the code.
 
 ---
@@ -16,8 +16,8 @@ plugins {
 dependencies {
     implementation("com.google.dagger:hilt-android:2.56.2")
     ksp("com.google.dagger:hilt-compiler:2.56.2")
-    implementation("top.cyclops:hilt-plus:0.1.3")
-    ksp("top.cyclops:hilt-plus-compiler:0.1.3")
+    implementation("top.cyclops:hilt-plus:version")
+    ksp("top.cyclops:hilt-plus-compiler:version")
 }
 ```
 
