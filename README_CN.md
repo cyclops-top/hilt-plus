@@ -1,7 +1,7 @@
 # Hilt Plus
 [![](https://img.shields.io/badge/ksp-2.1.10--1.0.31-important?logo=kotlin)](https://github.com/google/ksp)
 [![](https://img.shields.io/badge/hilt-2.56.2-important?logo=android)](https://developer.android.com/training/dependency-injection/hilt-android?hl=zh-cn)
-[![](https://img.shields.io/badge/hilt--plus-0.1.2-blueviolet?logo=android)](https://github.com/cyclops-top/hilt-plus)
+[![](https://img.shields.io/badge/hilt--plus-0.1.3-blueviolet?logo=android)](https://github.com/cyclops-top/hilt-plus)
 > 基于 Hilt 的轻量级扩展库，提供 **Room 多模块聚合**和**动态代理接口自动化注入**能力，用 20% 的代码解决 80% 的样板代码问题。
 
 ---
