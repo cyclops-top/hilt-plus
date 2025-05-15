@@ -20,7 +20,6 @@ kotlin {
 
 dependencies {
     implementation(project(":hilt-plus"))
-    implementation(kotlin("reflect"))
     implementation(project(":knit"))
     implementation(libs.hilt.core)
     implementation(libs.hilt.dagger.core)

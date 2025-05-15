@@ -12,10 +12,12 @@ import hilt.plus.compiler.core.HiltAnnotationParser
 
 class RoomProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(environment) {
     private val roomNodeCodeGen = RoomNodeCodeGen()
-    private val hiltRoomNodeDataParser = HiltAnnotationParser.getParser(HiltRoomNodeData::class)
+    private val hiltRoomNodeDataParser by lazy {
+        HiltAnnotationParser.from(HiltRoomNodeData)
+    }
     private val roomDatabaseCodeGen = RoomDatabaseCodeGen()
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        val nodes = resolver.getSymbolsWithAnnotation<HiltDaoData>(ClassKind.INTERFACE)
+        val nodes = resolver.getSymbolsWithAnnotation<HiltDaoData>(HiltDaoData, ClassKind.INTERFACE)
             .groupBy { it.data.node }
             .map { (node, items) ->
                 RoomNodeElement(RoomNodeType(node), items)
@@ -26,7 +28,8 @@ class RoomProcessor(environment: SymbolProcessorEnvironment) : BaseProcessor(env
         val rootNode = nodes.find { it.node.isRoot }
 
         val databaseElements =
-            resolver.getSymbolsWithAnnotation<HiltRoomData>(ClassKind.INTERFACE).toList()
+            resolver.getSymbolsWithAnnotation<HiltRoomData>(HiltRoomData, ClassKind.INTERFACE)
+                .toList()
         runCatching {
             databaseElements.map { data ->
                 val ns = data.data.nodes.map {

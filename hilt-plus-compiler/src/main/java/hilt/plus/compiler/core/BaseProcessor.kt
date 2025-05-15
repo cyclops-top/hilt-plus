@@ -7,7 +7,6 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.ClassKind
-import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSFile
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ksp.writeTo
@@ -42,14 +41,9 @@ abstract class BaseProcessor(
         file.save(dependencies)
     }
 
-    inline fun <reified T : Any> KSAnnotated.findAnnotationData(): T? {
-        val parser = HiltAnnotationParser.getParser(T::class)
-        return parser.findAnnotation(this)
-    }
-
-    inline fun <reified T : Any> Resolver.getSymbolsWithAnnotation(kind: ClassKind): Sequence<AnnotationElement<T>> {
-        val parser = HiltAnnotationParser.getParser(T::class)
-        return getSymbolsWithAnnotation(parser.annotationType)
+    inline fun <reified T : Any> Resolver.getSymbolsWithAnnotation(factory: AnnotationDataFactory<T>, kind: ClassKind): Sequence<AnnotationElement<T>> {
+        val parser = HiltAnnotationParser.from(factory)
+        return getSymbolsWithAnnotation(factory.annotation)
             .filterIsType {
                 it.classKind == kind
             }

@@ -8,3 +8,8 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.vanniktech.maven.publish) apply false
 }
+buildscript {
+    dependencies{
+        classpath(kotlin("reflect"))
+    }
+}
