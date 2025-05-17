@@ -54,6 +54,7 @@ data class RoomDatabaseElement(
             val daoList =
                 rootDaoList + nodes.map { node -> node.data.daoList.map { it.declaration as KSClassDeclaration } }
                     .flatten()
+
             return RoomDatabaseElement(
                 type = data.type,
                 data = data.data,
@@ -64,6 +65,6 @@ data class RoomDatabaseElement(
                 hasRoot = root != null
             )
         }
-
     }
+
 }

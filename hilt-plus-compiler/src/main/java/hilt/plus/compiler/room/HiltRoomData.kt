@@ -8,29 +8,21 @@ import hilt.plus.annotation.HiltRoom
 import hilt.plus.compiler.core.AnnotationArguments
 import hilt.plus.compiler.core.AnnotationDataFactory
 
-data class HiltRoomData(
-    val name: String,
-    val version: Int,
-    val nodes: List<KSType>,
-    val exportSchema: Boolean,
-    val autoMigrations: List<KSAnnotation>,
-    val inMemory: Boolean,
-    val interceptor: KSType,
-    val printSql: Boolean
-){
-    companion object: AnnotationDataFactory<HiltRoomData>{
+
+class HiltRoomData(data: AnnotationArguments) {
+    val name: String by data.property()
+    val version: Int by data.property()
+    val nodes: List<KSType> by data.property()
+    val exportSchema: Boolean by data.property()
+    val autoMigrations: List<KSAnnotation> by data.property()
+    val inMemory: Boolean by data.property()
+    val interceptor: KSType by data.property()
+    val printSql: Boolean by data.property()
+
+    companion object : AnnotationDataFactory<HiltRoomData> {
         override val annotation: ClassName = HiltRoom::class.asClassName()
         override fun create(args: AnnotationArguments): HiltRoomData {
-            return HiltRoomData(
-                args.get("name"),
-                args.get("version"),
-                args.get("nodes"),
-                args.get("exportSchema"),
-                args.get("autoMigrations"),
-                args.get("inMemory"),
-                args.get("interceptor"),
-                args.get("printSql"),
-            )
+            return HiltRoomData(args)
         }
     }
 }

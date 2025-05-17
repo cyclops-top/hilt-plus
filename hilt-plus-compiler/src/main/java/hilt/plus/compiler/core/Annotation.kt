@@ -8,7 +8,7 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.ksp.toClassName
+import com.squareup.kotlinpoet.ksp.toTypeName
 
 fun Resolver.getSymbolsWithAnnotation(className: ClassName): Sequence<KSAnnotated> {
     return getSymbolsWithAnnotation(className.canonicalName)
@@ -40,12 +40,12 @@ fun Sequence<KSAnnotated>.filterIsAnnotation(): Sequence<KSClassDeclaration> {
 
 fun KSAnnotated.findAnnotation(className: ClassName): KSAnnotation? {
     return annotations.find {
-        it.annotationType.resolve().toClassName() == className
+        it.annotationType.toTypeName() == className
     }
 }
 
 fun KSAnnotated.findAnnotations(className: ClassName): List<KSAnnotation> {
     return annotations.filter {
-        it.annotationType.resolve().toClassName() == className
+        it.annotationType.toTypeName() == className
     }.toList()
 }

@@ -7,20 +7,14 @@ import hilt.plus.annotation.HiltDao
 import hilt.plus.compiler.core.AnnotationArguments
 import hilt.plus.compiler.core.AnnotationDataFactory
 
-data class HiltDaoData(
-    val entities: List<KSType>,
-    val views: List<KSType>,
-    val node: KSType,
-) {
+class HiltDaoData(data: AnnotationArguments) {
+    val entities: List<KSType> by data.property()
+    val views: List<KSType> by data.property()
+    val node: KSType by data.property()
     companion object : AnnotationDataFactory<HiltDaoData> {
         override val annotation: ClassName = HiltDao::class.asClassName()
-
         override fun create(args: AnnotationArguments): HiltDaoData {
-            return HiltDaoData(
-                args.get("entities"),
-                args.get("views"),
-                args.get("node"),
-            )
+            return HiltDaoData(args)
         }
     }
 }

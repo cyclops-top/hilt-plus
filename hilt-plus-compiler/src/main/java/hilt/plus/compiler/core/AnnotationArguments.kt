@@ -1,6 +1,8 @@
 package hilt.plus.compiler.core
 
 import com.google.devtools.ksp.symbol.KSAnnotation
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 class AnnotationArguments(annotation: KSAnnotation) {
     private val arguments = buildMap {
@@ -19,5 +21,16 @@ class AnnotationArguments(annotation: KSAnnotation) {
 
     override fun toString(): String {
         return arguments.toString()
+    }
+
+    fun <T> property(): ReadOnlyProperty<Any, T> {
+        return AnnotationArgumentDelegate()
+    }
+
+    private inner class AnnotationArgumentDelegate<T> :
+        ReadOnlyProperty<Any, T> {
+        override fun getValue(thisRef: Any, property: KProperty<*>): T {
+            return get(property.name)
+        }
     }
 }

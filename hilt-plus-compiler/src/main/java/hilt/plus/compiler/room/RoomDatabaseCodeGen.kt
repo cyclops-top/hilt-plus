@@ -201,6 +201,7 @@ class RoomDatabaseCodeGen : HiltPlusCodeGen<RoomDatabaseElement, List<GeneratedF
         }
     }
 
+
     private fun RoomDatabaseElement.transactionProviderFunc(qualifier: KSClassDeclaration?): FunSpec {
         val className = qualifier?.toClassName()
         val name = className?.unionFuncName() ?: "tx"
