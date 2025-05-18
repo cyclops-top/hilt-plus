@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm)
     kotlin("kapt")
     alias(libs.plugins.vanniktech.maven.publish)
+    alias(libs.plugins.dokka)
 }
 val hiltPlusVersion = project.properties["version"] as String
 

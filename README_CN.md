@@ -5,7 +5,7 @@
 > 基于 Hilt 的轻量级扩展库，提供 **Room 多模块聚合**和**动态代理接口自动化注入**能力，用 20% 的代码解决 80% 的样板代码问题。
 
 ---
-
+[Api Doc](https://hilt-plus.cyclops.top/index.html)
 ## 安装
 ```kotlin
 // build.gradle.kts

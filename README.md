@@ -5,7 +5,7 @@
 > A lightweight extension library based on Hilt, providing **Room multi-module aggregation** and **automated injection for dynamic proxy interfaces**, solving 80% of boilerplate code with 20% of the code.
 
 ---
-[中文](README_CN.md)
+[中文](README_CN.md) [Api Doc](https://hilt-plus.cyclops.top/index.html)
 ## Installation
 ```kotlin
 // build.gradle.kts

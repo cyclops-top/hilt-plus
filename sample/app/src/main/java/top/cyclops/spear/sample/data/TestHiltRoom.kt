@@ -15,5 +15,4 @@ import top.cyclops.spear.module2.data.RoomNodeModule2
     printSql = true,
     interceptor = RoomBuilderInterceptor::class
 )
-internal interface TestHiltRoom : DatabaseTransaction {
-}
+internal interface TestHiltRoom : DatabaseTransaction
